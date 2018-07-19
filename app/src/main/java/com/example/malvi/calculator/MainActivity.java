@@ -85,6 +85,27 @@ public class MainActivity extends AppCompatActivity {
         buttonMultiply.setOnClickListener(oplistener);
         buttonPlus.setOnClickListener(oplistener);
         buttonMinus.setOnClickListener(oplistener);
+
+        Button buttonNegative = findViewById(R.id.buttonNegative);
+
+        buttonNegative.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String value = newNumber.getText().toString();
+                if(value.length() == 0){
+                    newNumber.setText("-");
+                }else{
+                    try{
+                        Double doubleValue = Double.valueOf(value);
+                        doubleValue *= -1;
+                        newNumber.setText(doubleValue.toString());
+                    }catch(NumberFormatException e){
+                        //clear if newnumber is "-" or "."
+                        newNumber.setText("");
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -108,7 +129,6 @@ public class MainActivity extends AppCompatActivity {
         if (null == operand1) {
             operand1 = value;
         } else {
-            value = value;
             if (pendingOperation.equals("=")) {
                 pendingOperation = operation;
             }
